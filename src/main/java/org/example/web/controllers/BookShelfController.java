@@ -42,6 +42,14 @@ public class BookShelfController {
 
         @PostMapping("/save")
         public String saveBook(Book book){
+            if (book.getAuthor().isEmpty()){
+                logger.info("No author");
+                return "redirect:shelf";
+            }
+            if (book.getTitle().isEmpty()){
+                logger.info("No title");
+                return "redirect:shelf";
+            }
             bookService.saveBook(book);
             logger.info("current repository size: "+bookService.getAllBooks().size());
             return "redirect:shelf";
