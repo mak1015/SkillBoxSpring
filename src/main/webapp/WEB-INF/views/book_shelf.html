@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>My book shelf</title>
+        <style>
+            #root_container{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root_container">
+            <form method="post" th:action="@{/books/save}" th:object="${book}">
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="author" th:field="*{author}">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="book_title" th:field="*{title}">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="size (pages)" th:field="*{size}">
+                    </td>
+                    <td>
+                        <input type="submit" value="save">
+                    </td>
+                    
+                </tr>
+            </table>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>Size</th>
+                    </tr>
+                    <tr th:each="book : ${bookList}">
+                        <td th:text="${book.id}"></td>
+                        <td th:text="${book.author}"></td>
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.size}"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>
